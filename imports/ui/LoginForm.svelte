@@ -8,22 +8,22 @@
   const handleSubmit = async () => {
       Meteor.call('verifyOrMakeAccount', username, password)
       Meteor.loginWithPassword(username, password, (err) => {
-          errMsg = err.reason
+          errMsg = err ? err.reason : ""
       })
   }
 </script>
 <section class="h-full gradient-form md:h-screen">
-  <div class="container py-12 px-6 h-full">
-    <div class="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
+  <div class="container h-full px-6 py-12">
+    <div class="flex flex-wrap items-center justify-center h-full text-gray-800 g-6">
       <div class="xl:w-10/12">
-        <div class="block bg-white shadow-lg rounded-lg">
+        <div class="block bg-white rounded-lg shadow-lg">
           <div class="lg:flex lg:flex-wrap g-0">
-            <div class="lg:w-6/12 px-4 md:px-0">
+            <div class="px-4 lg:w-6/12 md:px-0">
               <div class="md:p-12 md:mx-6">
                 <div class="text-center">
-                  <h4 class="text-xl font-semibold mt-1 mb-8 pb-1">Welcome</h4>
+                  <h4 class="pb-1 mt-1 mb-8 text-xl font-semibold">Welcome</h4>
                   <p class="mb-4">Login or make an account to start chatting</p>
-                  <p class="text-xs mb-4 text-gray-400 italic">A new account will be created if the username
+                  <p class="mb-4 text-xs italic text-gray-400">A new account will be created if the username
                   is available, otherwise we'll attempt to log you in</p>
                 </div>
                 <form on:submit|preventDefault={handleSubmit}>
@@ -47,7 +47,7 @@
                       bind:value={password}
                     />
                   </div>
-                  <div class="text-center pt-1 mb-12 pb-1">
+                  <div class="pt-1 pb-1 mb-12 text-center">
                     <button
                       class="inline-block px-6 py-2.5 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3"
                       type="submit"

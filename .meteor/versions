@@ -47,6 +47,8 @@ meteortesting:mocha-core@8.1.2
 minifier-css@1.6.0
 minifier-js@2.7.4
 minimongo@1.8.0
+mizzao:timesync@0.5.2
+mizzao:user-status@1.0.1
 mobile-experience@1.1.0
 mobile-status-bar@1.1.0
 modern-browsers@0.1.8

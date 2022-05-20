@@ -1,78 +1,53 @@
 <script>
-  import { TasksCollection } from '../db/TasksCollection';
-  import { Meteor } from 'meteor/meteor';
-  import Task from './Task.svelte';
-  import TaskForm from './TaskForm.svelte';
-  import LoginForm from './LoginForm.svelte';
+  import { Meteor } from "meteor/meteor";
+  import LoginForm from "./LoginForm.svelte";
 
-  let hideCompleted = false;
-
-  const hideCompletedFilter = { isChecked: { $ne: true } };
-
-
-  let incompleteCount;
-  let pendingTasksTitle = '';
-  let tasks = [];
+  let numUsers = 0;
   let user = null;
-  let isLoading = true;
+  let loading = true;
 
-  const handler = Meteor.subscribe('tasks');
   $m: {
     user = Meteor.user();
-
-    if (user) {
-
-        isLoading = !handler.ready();
-
-        const userFilter = { userId: user._id };
-        const pendingOnlyFilter = { ...hideCompletedFilter, ...userFilter };
-
-
-        tasks = TasksCollection.find(
-                hideCompleted ? pendingOnlyFilter : userFilter,
-                { sort: { createdAt: -1 } }
-            ).fetch();
-
-        incompleteCount = TasksCollection.find(pendingOnlyFilter).count();
-
-        pendingTasksTitle = `${
-          incompleteCount ? ` (${incompleteCount})` : ''
-        }`;
-    }
+    let handler = Meteor.subscribe("userStatuses");
+    loading = !handler.ready();
+    numUsers = Meteor.users.find().fetch().length;
   }
+  $: userCount = loading ? 'loading' : numUsers;
+  // if (user) {
 
-  const setHideCompleted = value => {
-    hideCompleted = value;
-  };
+  //     isLoading = !handler.ready();
+
+  //     const userFilter = { userId: user._id };
+  //     const pendingOnlyFilter = { ...hideCompletedFilter, ...userFilter };
+
+  //     tasks = TasksCollection.find(
+  //             hideCompleted ? pendingOnlyFilter : userFilter,
+  //             { sort: { createdAt: -1 } }
+  //         ).fetch();
+
+  //     incompleteCount = TasksCollection.find(pendingOnlyFilter).count();
+
+  //     pendingTasksTitle = `${
+  //       incompleteCount ? ` (${incompleteCount})` : ''
+  //     }`;
+  // }
+
   const logout = () => Meteor.logout();
 </script>
 
-<div class="bg-gray-200">
-    <div class="max-w-xl mx-auto">
-        {#if user}
-            <div class="user" on:click={logout}>
-                {user.username} 🚪
-            </div>
-
-            <TaskForm />
-
-            <div class="filter">
-                <button on:click={() => setHideCompleted(!hideCompleted)}>
-                    {hideCompleted ? 'Show All' : 'Hide Completed'}
-                </button>
-            </div>
-
-            {#if isLoading}
-                <div class="loading">loading...</div>
-            {/if}
-
-            <ul class="tasks">
-              {#each tasks as task (task._id)}
-                  <Task task={task} />
-              {/each}
-            </ul>
-        {:else}
-            <LoginForm />
-        {/if}
-    </div>
+<div class="flex flex-col min-h-screen bg-gray-200">
+  <header class="h-10 bg-red-400">Coming soon</header>
+  <main class="flex-grow">
+    {#if user}
+      <p>logged in</p>
+      <div class="user" on:click={logout}>
+        {user.username} | LOGOUT
+      </div>
+    {:else}
+      <LoginForm />
+    {/if}
+  </main>
+  <footer class="fixed inset-x-0 bottom-0 h-10 text-white bg-black">
+      Num users online: {userCount}
+  </footer>
 </div>

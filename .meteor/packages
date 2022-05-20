@@ -23,3 +23,4 @@ accounts-password@2.3.1
 meteortesting:mocha
 quave:testing
 standard-minifier-css
+mizzao:user-status

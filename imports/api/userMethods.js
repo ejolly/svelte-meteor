@@ -6,6 +6,7 @@ Meteor.methods({
     'verifyOrMakeAccount'(username, password) {
         if (!Accounts.findUserByUsername(username)) {
             console.log(`creating new account: ${username}`)
+            check(username, String);
             Accounts.createUser({ username, password });
         }
         return

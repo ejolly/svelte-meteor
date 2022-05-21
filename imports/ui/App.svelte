@@ -1,7 +1,7 @@
 <script>
   import { Meteor } from "meteor/meteor";
   import LoginForm from "./LoginForm.svelte";
-  import Chat from "./chatui/Main.svelte";
+  import ChatUI from "./chatui/ChatUI.svelte";
 
   let numUsers = 0;
   let user = null;
@@ -21,7 +21,7 @@
   <header class="h-10 bg-red-400">Coming soon</header>
   <main class="flex-grow">
     {#if user}
-    <Chat/>
+    <ChatUI/>
     {:else}
       <LoginForm />
     {/if}

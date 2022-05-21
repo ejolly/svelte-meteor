@@ -1,40 +1,53 @@
 import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
-import { TasksCollection } from '/imports/db/TasksCollection';
-import '/imports/api/tasksMethods';
+import { Messages } from "/imports/db/MessagesCollection";
 import '/imports/api/userMethods';
 import '/imports/api/userPublications';
-import '/imports/api/tasksPublications';
+import '/imports/api/messagesMethods';
+import '/imports/api/messagesPublications';
 
-const insertTask = (taskText, user) =>
-  TasksCollection.insert({
-    text: taskText,
-    userId: user._id,
-    createdAt: new Date(),
-  });
+const insertMessage = (msgObj) => Messages.insert(msgObj);
 
 const SEED_USERNAME = 'meteorite';
 const SEED_PASSWORD = 'password';
 
 Meteor.startup(() => {
-  if (!Accounts.findUserByUsername(SEED_USERNAME)) {
-    Accounts.createUser({
-      username: SEED_USERNAME,
-      password: SEED_PASSWORD,
-    });
-  }
+    if (!Accounts.findUserByUsername(SEED_USERNAME)) {
+        console.log("Creating dummy user")
+        Accounts.createUser({
+            username: SEED_USERNAME,
+            password: SEED_PASSWORD,
+        });
+        console.log("Dummy user creation not required")
+    }
+    if (Messages.find().count() === 0) {
+        // TODO: Change hard-coded from-to ids after working on user accounts 
+        [
+            {
+                text: 'Hi',
+                from: "meteorite",
+                to: "ejolly",
+                createdAt: new Date(),
+            },
+            {
+                text: 'Hii',
+                from: "ejolly",
+                to: "meteorite",
+                createdAt: new Date(),
+            },
+            {
+                text: 'How are you?',
+                from: "ejolly",
+                to: "meteorite",
+                createdAt: new Date(),
+            },
+            {
+                text: 'Great!',
+                from: "meteorite",
+                to: "ejolly",
+                createdAt: new Date(),
+            },
+        ].forEach(msgObj => insertMessage(msgObj));
+    }
 
-  const user = Accounts.findUserByUsername(SEED_USERNAME);
-
-  if (TasksCollection.find().count() === 0) {
-    [
-      'First Task',
-      'Second Task',
-      'Third Task',
-      'Fourth Task',
-      'Fifth Task',
-      'Sixth Task',
-      'Seventh Task',
-    ].forEach(taskText => insertTask(taskText, user));
-  }
 });

@@ -8,6 +8,13 @@
   $m: {
     username = Meteor.user().username;
   }
+  const handleTyping = () => {
+      console.log('typing')
+    // TODO: Change this to a deferred db write that changes my own user status to
+    // 'typing'. Then share user statuses as subscriptions and let animations be bound
+    // to the value of the subscription
+
+  }
 </script>
 
 <div class="max-w-screen-md mx-auto">
@@ -15,7 +22,7 @@
     <div class="w-full">
       <ProfileHeader {username} />
       <MessageList {username} />
-      <Input {username} />
+      <Input {username} on:typing={handleTyping} />
     </div>
   </div>
 </div>

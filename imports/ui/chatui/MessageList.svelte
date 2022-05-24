@@ -15,11 +15,11 @@
   }
 </script>
 
-<div class="relative w-full p-6 overflow-y-auto h-[40rem]">
+<div class="relative w-full p-6 overflow-y-auto h-[40rem] scrollbar-hide">
   {#if loading}
     Loading...
   {:else}
-    <ul class="space-y-2">
+    <ul class="space-y-2" id="message-list">
       {#each messages as message}
         <Message {message} {username} />
       {/each}

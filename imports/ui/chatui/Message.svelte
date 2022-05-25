@@ -8,7 +8,7 @@
   const formattedTime = `${message.createdAt.toLocaleTimeString()}`;
 
   function scrollIntoView(node) {
-      node.scrollIntoView({block: "end", inline: "nearest"});
+    node.scrollIntoView({ block: "end", inline: "nearest" });
   }
 </script>
 

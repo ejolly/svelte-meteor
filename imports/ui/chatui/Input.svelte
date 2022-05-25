@@ -4,7 +4,7 @@
   export let username;
 
   let message = "";
-  const dispatch = createEventDispatcher()
+  const dispatch = createEventDispatcher();
 
   // TODO: Change hard coding after expanding user accounts
   $: othername = username === "ejolly" ? "meteorite" : "ejolly";
@@ -66,7 +66,7 @@
     required
     bind:value={message}
     on:keyup={sendMessage}
-    on:keydown={() => dispatch('typing')}
+    on:keydown={() => dispatch("typing")}
   />
   <button>
     <svg

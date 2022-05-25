@@ -1,4 +1,3 @@
+*.DS*
 node_modules/
-imports/api/task*
-imports/ui/Task*
 tests/

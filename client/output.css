@@ -535,18 +535,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-left: 0.5rem;
 }
 
-.mt-0 {
-  margin-top: 0px;
-}
-
-.-mt-1 {
-  margin-top: -0.25rem;
-}
-
-.-mt-2 {
-  margin-top: -0.5rem;
-}
-
 .block {
   display: block;
 }
@@ -678,18 +666,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
 }
 
-.place-self-start {
-  place-self: start;
-}
-
-.self-start {
-  align-self: flex-start;
-}
-
-.self-end {
-  align-self: flex-end;
-}
-
 .overflow-y-auto {
   overflow-y: auto;
 }
@@ -798,10 +774,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding: 1.5rem;
 }
 
-.p-0 {
-  padding: 0px;
-}
-
 .py-10 {
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;
@@ -842,11 +814,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-right: 1rem;
 }
 
-.px-2 {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-}
-
 .pb-1 {
   padding-bottom: 0.25rem;
 }
@@ -880,19 +847,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-base {
   font-size: 1rem;
   line-height: 1.5rem;
-}
-
-.text-sm {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-}
-
-.text-\[0\.5rem\] {
-  font-size: 0.5rem;
-}
-
-.text-\[0\.6rem\] {
-  font-size: 0.6rem;
 }
 
 .font-semibold {

@@ -7,52 +7,55 @@ import '/imports/api/userPublications';
 import '/imports/api/messagesMethods';
 import '/imports/api/messagesPublications';
 
-// Create at least one fake account
-// other was created manually from meteor shell
-const SEED_USERNAME = 'meteorite';
-const SEED_PASSWORD = 'password';
+// Create at two fake accounts
+const dummyUsers = [
+  { username: 'meteorite', password: 'password' },
+  { username: 'ejolly', password: 'test' },
+];
+const dummyMessages = [
+  {
+    text: 'Hi',
+    from: "meteorite",
+    to: "ejolly",
+    createdAt: new Date(),
+  },
+  {
+    text: 'Hii',
+    from: "ejolly",
+    to: "meteorite",
+    createdAt: new Date(),
+  },
+  {
+    text: 'How are you?',
+    from: "ejolly",
+    to: "meteorite",
+    createdAt: new Date(),
+  },
+  {
+    text: 'Great!',
+    from: "meteorite",
+    to: "ejolly",
+    createdAt: new Date(),
+  }
+];
 
 // Helper function used below
 const insertMessage = (msgObj) => Messages.insert(msgObj);
 
 // Seed database with a few messages if it's empty
 Meteor.startup(() => {
-  if (!Accounts.findUserByUsername(SEED_USERNAME)) {
-    console.log("Creating dummy user");
-    Accounts.createUser({
-      username: SEED_USERNAME,
-      password: SEED_PASSWORD,
-    });
-    console.log("Dummy user creation not required");
-  }
+  console.log("Checking for dummy accounts...");
+  dummyUsers.forEach(({ username, password }) => {
+    if (!Accounts.findUserByUsername(username)) {
+      console.log(`Creating dummy user: ${username}`);
+      Accounts.createUser({ username, password });
+    }
+  });
+  console.log("Checking for dummy messages...");
   if (Messages.find().count() === 0) {
+    console.log("Seeding empty database with some messages...");
     // TODO: Change hard-coded from-to ids after working on user accounts 
-    [
-      {
-        text: 'Hi',
-        from: "meteorite",
-        to: "ejolly",
-        createdAt: new Date(),
-      },
-      {
-        text: 'Hii',
-        from: "ejolly",
-        to: "meteorite",
-        createdAt: new Date(),
-      },
-      {
-        text: 'How are you?',
-        from: "ejolly",
-        to: "meteorite",
-        createdAt: new Date(),
-      },
-      {
-        text: 'Great!',
-        from: "meteorite",
-        to: "ejolly",
-        createdAt: new Date(),
-      },
-    ].forEach(msgObj => insertMessage(msgObj));
+    dummyMessages.forEach(msgObj => insertMessage(msgObj));
   }
 
 });

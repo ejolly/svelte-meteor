@@ -1,6 +1,9 @@
 # Svelte + Tailwind + Meteor
 
-Messing around: After `npm install` just run `npm run dev` which starts tailwind JIT watcher and meteor together.
+Messing around: 
+- `curl https://install.meteor.com/ | sh` (only needed one time to install meteor)
+- `npm install`  (install dependencies)
+- then just run `npm run dev` which starts tailwind JIT watcher and meteor together.
 
 ## Notes for running
 
@@ -9,6 +12,7 @@ Messing around: After `npm install` just run `npm run dev` which starts tailwind
     - U: `ejolly` P: `test`
 - Can interact with the backend-server (i.e. executing methods, performing db reads/writes) using `meteor shell` in another terminal *after* `npm run dev`
 - Same idea with `meteor mongo` to launch mongodb cli/shell
+- You can wipe all databases using `meteor reset` after shutting down the server. This will reset app data to a fresh clone.
 
 ## Project organization explanation
 *originally created from meteor [svelte scaffold](https://svelte-tutorial.meteor.com/)*
